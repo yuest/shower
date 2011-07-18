@@ -61,6 +61,20 @@
                 }
                 if(prevent) e.preventDefault();
             }
+            if(e.type == 'DOMMouseScroll') {
+                var prevent = true;
+                switch(e.detail) {
+                    case 3:
+                        current++;
+                        break;
+                    case -3:
+                        current--;
+                        break;
+                    default:
+                        prevent = false;
+                }
+                if(prevent) e.preventDefault();
+            }
             if(e.type == 'click') {
                 current = slideList.indexOf(e.target.parentNode.parentNode.id);
             }
@@ -110,5 +124,6 @@
         if(isFull()) enterFull();
     }, false);
     document.addEventListener('keydown', turnSlide, false);
+    document.addEventListener('DOMMouseScroll', turnSlide, false);
 
 })();
